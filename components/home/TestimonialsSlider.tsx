@@ -6,11 +6,13 @@ import AnimatedSection from '@/components/ui/AnimatedSection'
 
 export default function TestimonialsSlider() {
   const [index, setIndex] = useState(0)
+  const [paused, setPaused] = useState(false)
 
   useEffect(() => {
+    if (paused) return
     const timer = setInterval(() => setIndex((i) => (i + 1) % testimonials.length), 4000)
     return () => clearInterval(timer)
-  }, [])
+  }, [paused])
 
   const t = testimonials[index]
 
@@ -22,7 +24,13 @@ export default function TestimonialsSlider() {
           <h2 className="font-serif text-4xl italic text-earth">Echte Erfahrungen</h2>
         </AnimatedSection>
 
-        <div className="min-h-[160px] flex items-center justify-center mb-8">
+        <div
+          className="min-h-[160px] flex items-center justify-center mb-8"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+          onFocus={() => setPaused(true)}
+          onBlur={() => setPaused(false)}
+        >
           <AnimatePresence mode="wait">
             <motion.div
               key={index}
@@ -41,14 +49,16 @@ export default function TestimonialsSlider() {
           </AnimatePresence>
         </div>
 
-        <div className="flex justify-center gap-2">
+        <div className="flex justify-center items-center gap-1">
           {testimonials.map((_, i) => (
             <button
               key={i}
               onClick={() => setIndex(i)}
               aria-label={`Testimonial ${i + 1}`}
-              className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${i === index ? 'bg-forest w-6' : 'bg-sage/40 w-2'}`}
-            />
+              className="p-3 cursor-pointer"
+            >
+              <span className={`block h-2 rounded-full transition-all duration-300 ${i === index ? 'bg-forest w-6' : 'bg-sage/40 w-2'}`} />
+            </button>
           ))}
         </div>
       </div>

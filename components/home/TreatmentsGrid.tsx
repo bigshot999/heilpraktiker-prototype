@@ -64,31 +64,33 @@ export default function TreatmentsGrid() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
           {treatments.map((t, i) => (
             <AnimatedSection key={t.slug} delay={i * 0.1}>
-              <motion.div
-                className="bg-white rounded-2xl border border-[#e8e0d6] overflow-hidden flex flex-col h-full cursor-pointer"
-                whileHover={{ y: -6, boxShadow: '0 16px 40px rgba(61,107,79,0.13)' }}
-                transition={{ duration: 0.25 }}
-              >
-                <div
-                  className="flex items-center justify-center p-6"
-                  style={{ background: `linear-gradient(135deg, ${t.gradientFrom}, ${t.gradientTo})` }}
+              <Link href={`/leistungen/${t.slug}`} className="block h-full">
+                <motion.div
+                  className="bg-white rounded-2xl border border-[#e8e0d6] overflow-hidden flex flex-col h-full cursor-pointer"
+                  whileHover={{ y: -6, boxShadow: '0 16px 40px rgba(61,107,79,0.13)' }}
+                  transition={{ duration: 0.25 }}
                 >
-                  {icons[t.slug]}
-                </div>
-                <div className="p-4 flex flex-col gap-2 flex-1">
-                  <h3 className="font-sans font-bold text-sm text-earth">{t.name}</h3>
-                  <p className="font-sans text-xs text-muted leading-relaxed">{t.shortDescription}</p>
-                  <div className="flex items-center gap-1.5 bg-forest/[0.07] rounded-full px-3 py-2 mt-1 min-h-[48px]">
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#3D6B4F" strokeWidth="2.5" strokeLinecap="round">
-                      <path d="M20 6L9 17l-5-5"/>
-                    </svg>
-                    <span className="font-sans text-[10px] font-semibold text-forest leading-tight">{t.benefit}</span>
+                  <div
+                    className="flex items-center justify-center p-6"
+                    style={{ background: `linear-gradient(135deg, ${t.gradientFrom}, ${t.gradientTo})` }}
+                  >
+                    {icons[t.slug]}
                   </div>
-                  <Link href={`/leistungen/${t.slug}`} className="font-sans text-xs font-semibold text-forest mt-auto pt-2 hover:underline">
-                    Mehr erfahren →
-                  </Link>
-                </div>
-              </motion.div>
+                  <div className="p-4 flex flex-col gap-2 flex-1">
+                    <h3 className="font-sans font-bold text-sm text-earth">{t.name}</h3>
+                    <p className="font-sans text-xs text-muted leading-relaxed">{t.shortDescription}</p>
+                    <div className="flex items-center gap-1.5 bg-forest/[0.07] rounded-full px-3 py-2 mt-1 min-h-[48px]">
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#3D6B4F" strokeWidth="2.5" strokeLinecap="round">
+                        <path d="M20 6L9 17l-5-5"/>
+                      </svg>
+                      <span className="font-sans text-[10px] font-semibold text-forest leading-tight">{t.benefit}</span>
+                    </div>
+                    <span className="font-sans text-xs font-semibold text-forest mt-auto pt-2">
+                      Mehr erfahren →
+                    </span>
+                  </div>
+                </motion.div>
+              </Link>
             </AnimatedSection>
           ))}
         </div>

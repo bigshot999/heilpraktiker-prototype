@@ -3,13 +3,19 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useBookingModal } from '@/context/BookingModalContext'
 
+const inputCls = 'w-full border border-[#e8e0d6] rounded-xl px-4 py-3 font-sans text-sm bg-white text-earth outline-none focus:border-forest transition-colors'
+const labelCls = 'flex flex-col gap-1'
+const labelTextCls = 'font-sans text-xs text-muted font-medium'
+
 export default function BookingModal() {
   const { isOpen, close } = useBookingModal()
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    setSubmitted(true)
+    setLoading(true)
+    setTimeout(() => { setLoading(false); setSubmitted(true) }, 800)
   }
 
   function handleClose() {
@@ -49,47 +55,38 @@ export default function BookingModal() {
                 <h2 className="font-serif text-2xl italic text-earth mb-1">Lernen wir uns kennen.</h2>
                 <p className="font-sans text-sm text-muted mb-6 leading-relaxed">15 Minuten, kostenlos, unverbindlich — ich freue mich auf Sie.</p>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-                  <input
-                    required
-                    type="text"
-                    placeholder="Ihr Name"
-                    aria-label="Name"
-                    className="w-full border border-[#e8e0d6] rounded-xl px-4 py-3 font-sans text-sm bg-white text-earth outline-none focus:border-forest transition-colors"
-                  />
-                  <input
-                    required
-                    type="email"
-                    placeholder="Ihre E-Mail-Adresse"
-                    aria-label="E-Mail"
-                    className="w-full border border-[#e8e0d6] rounded-xl px-4 py-3 font-sans text-sm bg-white text-earth outline-none focus:border-forest transition-colors"
-                  />
-                  <input
-                    type="tel"
-                    placeholder="Telefonnummer (optional)"
-                    aria-label="Telefonnummer"
-                    className="w-full border border-[#e8e0d6] rounded-xl px-4 py-3 font-sans text-sm bg-white text-earth outline-none focus:border-forest transition-colors"
-                  />
-                  <select
-                    required
-                    aria-label="Anliegen"
-                    defaultValue=""
-                    className="w-full border border-[#e8e0d6] rounded-xl px-4 py-3 font-sans text-sm bg-white text-earth outline-none focus:border-forest transition-colors appearance-none"
-                  >
-                    <option value="" disabled>Anliegen wählen…</option>
-                    <option>Allgemeines Kennenlernen</option>
-                    <option>Phytotherapie</option>
-                    <option>Homöopathie</option>
-                    <option>Akupunktur</option>
-                    <option>Ernährungsberatung</option>
-                    <option>Stressmedizin</option>
-                  </select>
+                  <label htmlFor="booking-name" className={labelCls}>
+                    <span className={labelTextCls}>Name *</span>
+                    <input id="booking-name" required type="text" placeholder="Ihr Name" className={inputCls} />
+                  </label>
+                  <label htmlFor="booking-email" className={labelCls}>
+                    <span className={labelTextCls}>E-Mail *</span>
+                    <input id="booking-email" required type="email" placeholder="Ihre E-Mail-Adresse" className={inputCls} />
+                  </label>
+                  <label htmlFor="booking-tel" className={labelCls}>
+                    <span className={labelTextCls}>Telefon (optional)</span>
+                    <input id="booking-tel" type="tel" placeholder="Ihre Telefonnummer" className={inputCls} />
+                  </label>
+                  <label htmlFor="booking-anliegen" className={labelCls}>
+                    <span className={labelTextCls}>Anliegen *</span>
+                    <select id="booking-anliegen" required defaultValue="" className={`${inputCls} appearance-none`}>
+                      <option value="" disabled>Bitte wählen…</option>
+                      <option>Allgemeines Kennenlernen</option>
+                      <option>Phytotherapie</option>
+                      <option>Homöopathie</option>
+                      <option>Akupunktur</option>
+                      <option>Ernährungsberatung</option>
+                      <option>Stressmedizin</option>
+                    </select>
+                  </label>
                   <motion.button
                     type="submit"
-                    className="w-full bg-amber text-white rounded-full py-3 font-sans font-semibold text-sm cursor-pointer shadow-[0_4px_14px_rgba(193,123,45,0.3)]"
-                    whileHover={{ y: -2 }}
-                    whileTap={{ scale: 0.98 }}
+                    disabled={loading}
+                    className="w-full bg-amber text-white rounded-full py-3 font-sans font-semibold text-sm cursor-pointer shadow-[0_4px_14px_rgba(193,123,45,0.3)] disabled:opacity-70 disabled:cursor-not-allowed mt-1"
+                    whileHover={loading ? {} : { y: -2 }}
+                    whileTap={loading ? {} : { scale: 0.98 }}
                   >
-                    Termin anfragen →
+                    {loading ? 'Wird gesendet…' : 'Termin anfragen →'}
                   </motion.button>
                 </form>
                 <p className="font-sans text-xs text-warmgrey text-center mt-4">

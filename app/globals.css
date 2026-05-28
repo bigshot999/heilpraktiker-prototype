@@ -30,6 +30,11 @@ body {
   background-color: #FAF7F2;
   color: #2C2418;
   -webkit-font-smoothing: antialiased;
+  overscroll-behavior: none;
+}
+
+button, a, [role="button"] {
+  touch-action: manipulation;
 }
 
 *:focus-visible {
