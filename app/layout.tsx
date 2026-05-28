@@ -55,6 +55,20 @@ export const metadata: Metadata = {
   alternates: { canonical: SITE_URL },
 }
 
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: SITE_NAME,
+  url: SITE_URL,
+  description: SITE_DESCRIPTION,
+  inLanguage: 'de-DE',
+  publisher: {
+    '@type': 'Organization',
+    name: 'Naturheilpraxis Anna Berger',
+    url: SITE_URL,
+  },
+}
+
 const localBusinessSchema = {
   '@context': 'https://schema.org',
   '@type': ['LocalBusiness', 'MedicalBusiness'],
@@ -99,6 +113,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="de" className={`${cormorant.variable} ${raleway.variable}`}>
       <body>
+        <JsonLd data={websiteSchema} />
         <JsonLd data={localBusinessSchema} />
         <BookingModalProvider>
           <Navigation />

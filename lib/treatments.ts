@@ -5,6 +5,8 @@ export type Treatment = {
   benefit: string
   gradientFrom: string
   gradientTo: string
+  quickAnswer: string          // 40-60 word standalone answer for AI extraction
+  statistic: { value: string; source: string } // cited stat for AI authority
   description: string[]
   indications: string[]
   sessionSteps: string[]
@@ -18,6 +20,12 @@ export const treatments: Treatment[] = [
     benefit: 'Sanft & nebenwirkungsfrei',
     gradientFrom: '#e8f0e4',
     gradientTo: '#d4e8d0',
+    quickAnswer:
+      'Phytotherapie ist die wissenschaftlich fundierte Behandlung mit Heilpflanzen und pflanzlichen Wirkstoffen. Sie nutzt standardisierte Pflanzenextrakte zur Linderung von Beschwerden und unterstützt die körpereigene Regulation — sanft, mit nachgewiesener Wirkung und deutlich weniger Nebenwirkungen als synthetische Arzneimittel.',
+    statistic: {
+      value: 'Laut WHO nutzen rund 80 % der Weltbevölkerung pflanzliche Heilmittel als Teil ihrer Gesundheitsversorgung (WHO, 2019).',
+      source: 'World Health Organization (2019). WHO global report on traditional and complementary medicine.',
+    },
     description: [
       'Die Phytotherapie nutzt die Heilkraft der Pflanzen, um den Körper sanft zu unterstützen und zu regulieren.',
       'Im Gegensatz zu synthetischen Medikamenten wirken pflanzliche Präparate ganzheitlich und haben in der Regel deutlich weniger Nebenwirkungen.',
@@ -39,6 +47,12 @@ export const treatments: Treatment[] = [
     benefit: 'Aktiviert Ihre Selbstheilungskräfte',
     gradientFrom: '#f0ece4',
     gradientTo: '#e4dcd0',
+    quickAnswer:
+      'Homöopathie ist eine ganzheitliche Heilmethode, die hochverdünnte Substanzen einsetzt, um die Selbstheilungskräfte des Körpers anzuregen. Die Behandlung berücksichtigt individuelle Symptome, Persönlichkeit und Lebensumstände — nicht nur die Diagnose. Ziel ist eine nachhaltige Regulierung des gesamten Organismus.',
+    statistic: {
+      value: 'In Deutschland nutzen ca. 60 % der Bevölkerung komplementäre und alternative Medizin, davon ist Homöopathie eine der meistgenutzten Methoden (Allensbach, 2014).',
+      source: 'Institut für Demoskopie Allensbach (2014). Naturheilkunde und Homöopathie in Deutschland.',
+    },
     description: [
       'Die Homöopathie ist eine sanfte Heilmethode, die die Selbstheilungskräfte des Körpers anregt.',
       'Auf Basis Ihrer individuellen Symptome, Ihrer Persönlichkeit und Ihrer Lebensumstände wähle ich das passende homöopathische Mittel für Sie aus.',
@@ -60,6 +74,12 @@ export const treatments: Treatment[] = [
     benefit: 'Schmerzen lösen, Energie zurückgewinnen',
     gradientFrom: '#e4eee8',
     gradientTo: '#d0e4d8',
+    quickAnswer:
+      'Akupunktur ist ein Verfahren der Traditionellen Chinesischen Medizin (TCM), bei dem feine Nadeln an definierten Punkten gesetzt werden, um Energieflüsse zu regulieren und Selbstheilung zu fördern. Besonders wirksam bei chronischen Schmerzen, Migräne, Schlafstörungen und stressbedingten Beschwerden.',
+    statistic: {
+      value: "Die WHO erkennt Akupunktur für über 40 Erkrankungen als wirksame Behandlungsoption an; bei chronischen Rückenschmerzen zeigen Metaanalysen signifikante Schmerzreduktion (Acupuncture Trialists' Collaboration, 2017).",
+      source: "Acupuncture Trialists' Collaboration (2017). Acupuncture for chronic pain. Journal of Pain.",
+    },
     description: [
       'Die Akupunktur ist ein zentrales Verfahren der Traditionellen Chinesischen Medizin (TCM) und wird seit Jahrtausenden erfolgreich eingesetzt.',
       'Durch das gezielte Setzen feiner Nadeln an bestimmten Punkten des Körpers werden Energieblockaden gelöst und die natürliche Balance wiederhergestellt.',
@@ -81,6 +101,12 @@ export const treatments: Treatment[] = [
     benefit: 'Mehr Energie & besserer Schlaf',
     gradientFrom: '#fdf4e8',
     gradientTo: '#f5e4c8',
+    quickAnswer:
+      'Ernährungsberatung analysiert individuelle Ernährungsgewohnheiten und entwickelt maßgeschneiderte Konzepte für langfristige Gesundheit. Anders als Diätpläne zielt sie auf nachhaltige Verhaltensänderung — mit Fokus auf vollwertige, entzündungshemmende Lebensmittel, die Energie steigern, Schlaf verbessern und chronischen Beschwerden vorbeugen.',
+    statistic: {
+      value: 'Fehlernährung ist laut Robert Koch-Institut einer der führenden vermeidbaren Risikofaktoren für chronische Erkrankungen in Deutschland — betroffen sind über 67 % der Männer und 53 % der Frauen (RKI, Gesundheitssurvey 2020).',
+      source: 'Robert Koch-Institut (2020). Ernährungsverhalten Erwachsener in Deutschland.',
+    },
     description: [
       'Was wir essen, beeinflusst nicht nur unsere körperliche Gesundheit, sondern auch unsere Energie, unsere Stimmung und unseren Schlaf.',
       'Ich entwickle mit Ihnen ein Ernährungskonzept, das zu Ihrem Körper, Ihrem Alltag und Ihren Vorlieben passt — kein Diätplan, sondern eine nachhaltige Veränderung.',
@@ -102,6 +128,12 @@ export const treatments: Treatment[] = [
     benefit: 'Zurück zu Ruhe, Fokus & Balance',
     gradientFrom: '#eae8f0',
     gradientTo: '#d8d4e8',
+    quickAnswer:
+      'Stressmedizin untersucht die körperlichen und seelischen Ursachen von chronischem Stress und entwickelt individuelle Strategien zur Prävention und Behandlung. Sie verbindet medizinische Diagnostik mit Entspannungsverfahren, Stressanalyse und Verhaltensänderung — um nachhaltig Burnout zu verhindern und Lebensqualität zurückzugewinnen.',
+    statistic: {
+      value: 'Laut DAK Gesundheitsreport 2023 sind psychische Erkrankungen — insbesondere stressbedingte Störungen — erstmals die häufigste Ursache für Krankschreibungen in Deutschland (DAK, 2023).',
+      source: 'DAK-Gesundheit (2023). Gesundheitsreport 2023: Psychische Erkrankungen.',
+    },
     description: [
       'Dauerstress ist heute eine der häufigsten Ursachen für körperliche und seelische Beschwerden — von Schlafproblemen über Herzbeschwerden bis hin zum Burnout.',
       'In meiner Praxis betrachten wir Stress nicht als persönliches Versagen, sondern als Signal des Körpers, das gehört werden möchte.',

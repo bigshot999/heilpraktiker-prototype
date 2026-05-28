@@ -1,13 +1,36 @@
 import { Treatment, treatments } from '@/lib/treatments'
 import BookingButton from '@/components/ui/BookingButton'
 import AnimatedSection from '@/components/ui/AnimatedSection'
+import JsonLd from '@/components/seo/JsonLd'
 import Link from 'next/link'
+import { SITE_URL } from '@/lib/site'
 
 export default function TreatmentPageTemplate({ treatment }: { treatment: Treatment }) {
   const related = treatments.filter((t) => t.slug !== treatment.slug).slice(0, 3)
 
+  const howToSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: `Ablauf einer ${treatment.name}-Behandlung bei Anna Berger`,
+    description: `Schritt-für-Schritt: So läuft eine ${treatment.name}-Sitzung in der Naturheilpraxis München ab.`,
+    step: treatment.sessionSteps.map((step, i) => ({
+      '@type': 'HowToStep',
+      position: i + 1,
+      name: step,
+      text: step,
+    })),
+    author: {
+      '@type': 'Person',
+      name: 'Anna Berger',
+      jobTitle: 'Heilpraktikerin',
+      url: `${SITE_URL}/ueber-mich`,
+    },
+  }
+
   return (
     <>
+      <JsonLd data={howToSchema} />
+
       <section className="bg-cream pt-32 pb-20">
         <div className="max-w-4xl mx-auto px-6">
           <AnimatedSection>
@@ -21,12 +44,31 @@ export default function TreatmentPageTemplate({ treatment }: { treatment: Treatm
       </section>
 
       <section className="bg-linen py-16">
-        <div className="max-w-4xl mx-auto px-6">
+        <div className="max-w-4xl mx-auto px-6 flex flex-col gap-8">
           <AnimatedSection className="flex flex-col gap-4">
             <h2 className="font-serif text-3xl italic text-earth">Was ist {treatment.name}?</h2>
+
+            {/* AI extraction block — standalone 40-60 word definition */}
+            <div className="border-l-4 border-forest bg-white rounded-r-2xl px-6 py-4">
+              <p className="font-sans text-sm text-earth leading-relaxed">{treatment.quickAnswer}</p>
+            </div>
+
             {treatment.description.map((p, i) => (
               <p key={i} className="font-sans text-base text-muted leading-relaxed">{p}</p>
             ))}
+          </AnimatedSection>
+
+          {/* Cited statistic — authority signal for AI */}
+          <AnimatedSection delay={0.15}>
+            <div className="bg-forest/[0.05] border border-forest/20 rounded-2xl px-6 py-4 flex gap-3 items-start">
+              <svg className="shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3D6B4F" strokeWidth="2" strokeLinecap="round">
+                <circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/>
+              </svg>
+              <div>
+                <p className="font-sans text-sm text-earth leading-relaxed">{treatment.statistic.value}</p>
+                <p className="font-sans text-xs text-muted mt-1">Quelle: {treatment.statistic.source}</p>
+              </div>
+            </div>
           </AnimatedSection>
         </div>
       </section>
