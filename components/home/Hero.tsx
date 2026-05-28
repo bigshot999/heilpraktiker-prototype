@@ -72,6 +72,10 @@ export default function Hero() {
             </h1>
           </motion.div>
 
+          <motion.p {...stagger(1.5)} className="font-sans text-xs uppercase tracking-[2px] text-forest/60 -mt-2">
+            Heilpraktikerin für Naturheilkunde · München
+          </motion.p>
+
           <motion.p {...stagger(2)} className="font-sans text-base text-muted leading-relaxed max-w-sm">
             Viele meiner Patientinnen und Patienten kommen zu mir, weil sie das Gefühl haben, nicht wirklich gehört zu werden. Das ändert sich hier.
           </motion.p>

@@ -2,7 +2,11 @@ import BookingButton from '@/components/ui/BookingButton'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import type { Metadata } from 'next'
 
-export const metadata: Metadata = { title: 'Über mich | Anna Berger Heilpraktikerin' }
+export const metadata: Metadata = {
+  title: 'Heilpraktikerin München — Über Anna Berger',
+  description: 'Anna Berger ist Heilpraktikerin für Naturheilkunde & Ganzheitsmedizin in München. Erfahren Sie mehr über ihre Geschichte, Ausbildung und Behandlungsphilosophie.',
+  alternates: { canonical: 'https://anna-berger-heilpraktikerin.de/ueber-mich' },
+}
 
 export default function UeberMichPage() {
   return (
